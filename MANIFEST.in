@@ -1,0 +1,7 @@
+include LICENSE.txt
+include README.md
+include contrib_colormaps/._version
+graft examples
+global-exclude *.py[co]
+global-exclude *~
+global-exclude *.ipynb_checkpoints/*
