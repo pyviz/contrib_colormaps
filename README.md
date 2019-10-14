@@ -19,8 +19,8 @@ for use with Python plotting programs like
 
 ## Installation
 
-contrib_colormaps supports Python 2.7, 3.5, 3.6 and 3.7 on Linux, Windows, or Mac
-and can be installed with conda:
+contrib_colormaps supports Python 2.7, 3.5, 3.6 and 3.7 on Linux, Windows,
+or Mac and can be installed with conda:
 
 ```
     conda install contrib_colormaps
@@ -34,7 +34,8 @@ or with pip:
 
 ## Contributing a colormap
 
-To add a colormap, open a pull request on this repository adding a csv of RGB values to the contrib_colormaps/colormaps
+To add a colormap, open a pull request on this repository adding a
+comma-separated file of RGB values to the contrib_colormaps/colormaps
 directory. This file should look like:
 
 ```
@@ -43,10 +44,11 @@ directory. This file should look like:
 ```
 
 This PR should also include a new notebook in
-
-
+[examples/colormaps](examples/colormaps) with a name that matches the
+name of the csv (e.g. for a new colormap called 'rainforest' with a csv
+'rainforest.csv' there should be a corresponding 'rainforest.ipynb').
 
 ## About PyViz
 
-contrib_colormaps is part of the PyViz initiative for making Python-based visualization tools work well together.
-See [pyviz.org](http://pyviz.org).
+contrib_colormaps is part of the PyViz initiative for making Python-based
+visualization tools work well together. See [pyviz.org](http://pyviz.org).
