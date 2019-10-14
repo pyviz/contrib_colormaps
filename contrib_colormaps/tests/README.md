@@ -7,7 +7,7 @@ To run these tests with the fig checking enabled first install pytest-mpl:
 pip install pytest-mpl
 ```
 
-To regenerate these figures from within this dir run:
+To regenerate these figures **from within this dir** run:
 
 ```bash
 pytest --mpl-generate-path=baseline
