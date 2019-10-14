@@ -23,6 +23,7 @@ extras_require = {
     'examples': examples,
     'doc': examples + [
         'nbsite >=0.6.1',
+        'tornado<6',
     ],
     'tests_extra': tests + [
         'pytest-mpl'  # only available on pip and conda-forge
