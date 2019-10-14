@@ -31,3 +31,32 @@ def swatch(name, bounds=None, array=array, **kwargs):
         plot.opts(opts.Image(backend='matplotlib', aspect=aspect, fig_size=fig_size,
                              cmap=cm[name]))
     return plot.opts(opts.Image(xaxis=None, yaxis=None), opts.Image(**kwargs))
+
+
+def swatches(names=None, cols=None, **kwargs):
+    """Show swatches for all names or given names"""
+    if not names:
+        names = sorted([name for name in palette.keys()])
+
+    if not cols:
+        cols = 2 if len(names) >= 2 else 1
+
+    backends = hv.Store.loaded_backends()
+    if 'matplotlib' in backends:
+        if 'aspect' not in kwargs:
+            kwargs['aspect'] = 12 // cols
+        if 'fig_size' not in kwargs:
+            kwargs['fig_size'] = 500 // cols
+    if 'bokeh' in backends:
+        if 'height' not in kwargs:
+            kwargs['height'] = 100
+        if 'width' not in kwargs:
+            kwargs['width'] = (9 * kwargs['height']) // cols
+
+    images = [swatch(name, **kwargs) for name in names]
+    plot = hv.Layout(images).opts(plot=dict(transpose=True)).cols(int(np.ceil(len(images)*1.0/cols)))
+
+    if 'matplotlib' in backends:
+        plot.opts(opts.Layout(backend='matplotlib', sublabel_format=None,
+                              fig_size=kwargs.get('fig_size', 150)))
+    return plot

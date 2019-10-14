@@ -23,16 +23,16 @@ contrib_colormaps supports Python 2.7, 3.5, 3.6 and 3.7 on Linux, Windows,
 or Mac and can be installed with conda:
 
 ```
-    conda install contrib_colormaps
+conda install contrib_colormaps
 ```
 
 or with pip:
 
 ```
-    pip install contrib_colormaps
+pip install contrib_colormaps
 ```
 
-## Contributing a colormap
+## Contributing
 
 To add a colormap, open a pull request on this repository adding a
 comma-separated file of RGB values to the contrib_colormaps/colormaps
@@ -47,6 +47,16 @@ This PR should also include a new notebook in
 [examples/colormaps](examples/colormaps) with a name that matches the
 name of the csv (e.g. for a new colormap called 'rainforest' with a csv
 'rainforest.csv' there should be a corresponding 'rainforest.ipynb').
+
+The last requirement is that you regenerate the baseline images used for tests.
+First make sure you have holoviews, matplotlib, and pytest-mpl in your
+environment. Then change directories into tests, and regenerate the plots
+
+```
+cd contrib_colorcets/tests
+pytest --mpl-generate-path=baseline
+```
+
 
 ## About PyViz
 

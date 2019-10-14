@@ -16,7 +16,7 @@ stages:
   - name: package
     if: tag =~ ^v(\d+|\.)+[^a-z]\d+$
   - name: website_dev
-    if: tag =~ ^v(\d+|\.)+[a-z]\d+$ OR tag = website_dev
+    if: tag =~ ^v(\d+|\.)+[a-z]\d+$ OR tag = website_dev OR commit_message =~ /^.*(website_dev).*$/
   - name: website_release
     if: tag =~ ^v(\d+|\.)+[^a-z]\d+$ OR tag = website
 
@@ -53,7 +53,6 @@ jobs:
           local_dir: ./builtdocs
           repo: pyviz-dev/contrib_colormaps
           on:
-            tags: true
             all_branches: true
 
     ## dev packages
