@@ -20,6 +20,7 @@ or as individually importable Python attributes:
 from .core import cmaps, palette, cm
 from ._version import get_versions
 
+
 __version__ = get_versions()["version"]
 
 # Add contributor cmaps to namespace

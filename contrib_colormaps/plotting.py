@@ -24,10 +24,10 @@ def swatch(name, bounds=None, array=array, **kwargs):
         height = kwargs.pop('height', 100)
         plot.opts(opts.Image(backend='bokeh', width=width, height=height, toolbar='above',
                              default_tools=['xwheel_zoom', 'xpan', 'save', 'reset'],
-                             cmap=cmap or palette[name]))
+                             cmap=palette[name]))
     if 'matplotlib' in backends:
         aspect = kwargs.pop('aspect', 15)
         fig_size = kwargs.pop('fig_size', 350)
         plot.opts(opts.Image(backend='matplotlib', aspect=aspect, fig_size=fig_size,
-                             cmap=cmap or cm[name]))
+                             cmap=cm[name]))
     return plot.opts(opts.Image(xaxis=None, yaxis=None), opts.Image(**kwargs))

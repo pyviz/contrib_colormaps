@@ -41,8 +41,7 @@ setup(
     version=versioneer.get_version(),
     cmdclass=versioneer.get_cmdclass(),
     long_description=open('README.md').read(),
-    long_description_type='text/markdown',
-    license_file='LICENSE.txt',
+    long_description_content_type='text/markdown',
     license='CC-BY License',
     classifiers=[
         "License :: Other/Proprietary License",

@@ -1,4 +1,5 @@
 language: generic
+os: linux
 
 env:
   global:
@@ -21,30 +22,18 @@ stages:
 
 jobs:
   include:
-    - &default
+    - &pip_default
       stage: test
-      os: linux
-      install:
-        - pip install pyctdev && doit miniconda_install && pip uninstall -y doit pyctdev
-        - export PATH="$HOME/miniconda/bin:$PATH" && hash -r
-        - conda config --set always_yes True
-        - conda install -c pyviz pyctdev && doit ecosystem_setup
-      before_script:
-        - doit env_create --name=contrib_colormaps --python=$PYENV_VERSION
-        - source activate contrib_colormaps
-        - doit develop_install $CHANS -o examples
-        - doit env_capture
-      script:
-        - doit test_all
-
+      before_install: pip install pyctdev && doit ecosystem_setup
+      install: doit develop_install -o examples -o tests
+      script: doit test_all
 
     - &website
-      <<: *default
+      <<: *pip_default
       stage: website_release
       script:
-        - doit develop_install $CHANS -o doc -o examples
-        - doit build_website
-
+        - doit develop_install -o doc -o examples
+        - doit build_docs
       deploy:
         - provider: pages
           skip_cleanup: true
@@ -70,20 +59,25 @@ jobs:
     ## dev packages
 
     - &pip_pkg
+      <<: *pip_default
       env: PYPI=testpypi PYPIUSER=$TPPU PYPIPASS=$TPPP
       stage: dev_package
-      install: pip install pyctdev && doit ecosystem=pip ecosystem_setup
+      install: True
       before_script:
-        - doit ecosystem=pip package_build $PKG_TEST_PYTHON --test-group=unit --sdist-install-build-deps
-      script: doit ecosystem=pip package_upload -u $PYPIUSER -p $PYPIPASS --pypi ${PYPI}
+        - doit package_build $PKG_TEST_PYTHON --test-group=unit --sdist-install-build-deps
+      script: doit package_upload -u $PYPIUSER -p $PYPIPASS --pypi ${PYPI}
 
     - &conda_pkg
-      <<: *default
       stage: dev_package
       env: LABELS=$LABELS_DEV
+      install:
+        - pip install pyctdev && doit ecosystem=conda miniconda_install && pip uninstall -y doit pyctdev
+        - export PATH="$HOME/miniconda/bin:$PATH" && hash -r
+        - conda config --set always_yes True
+        - conda install -c pyviz pyctdev && doit ecosystem=condaecosystem_setup
       before_script:
-        - travis_wait 60 doit package_build $CHANS $PKG_TEST_PYTHON --test-group=unit
-      script: doit package_upload --token=$ANACONDA_TOKEN $LABELS
+        - travis_wait 60 doit ecosystem=conda package_build $CHANS $PKG_TEST_PYTHON --test-group=unit
+      script: doit ecosystem=conda package_upload --token=$ANACONDA_TOKEN $LABELS
 
     ## release packages
 

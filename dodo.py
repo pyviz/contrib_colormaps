@@ -15,13 +15,10 @@ To run one command, for instance building the website, run:
 $ doit build_website
 """
 
-import os
-if "PYCTDEV_ECOSYSTEM" not in os.environ:
-    os.environ["PYCTDEV_ECOSYSTEM"] = "conda"
 from pyctdev import * # noqa: api
 
 
-def task_build_website():
+def task_build_docs():
     return {'actions': [
         "nbsite generate-rst --org pyviz --project-name contrib_colormaps --offset 0",
         "nbsite build --what=html --output=builtdocs",
