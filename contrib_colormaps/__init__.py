@@ -17,9 +17,10 @@ or as individually importable Python attributes:
   m_name
   b_name
 """
-
-
 from .core import cmaps, palette, cm
+from ._version import get_versions
+
+__version__ = get_versions()["version"]
 
 # Add contributor cmaps to namespace
 for name, cmap in cmaps.items():
@@ -30,3 +31,7 @@ for name, cmap in palette.items():
 
 for name, cmap in cm.items():
     globals()['m_{name}'.format(name=name)] = cmap
+
+from ._version import get_versions
+__version__ = get_versions()['version']
+del get_versions
