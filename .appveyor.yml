@@ -1,17 +1,12 @@
 environment:
-  global:
-    CHANS_DEV: "-c pyviz"
   matrix:
     - PY: "3.6"
       PYTHON: "C:\\Python36-x64"
-      CONDA: "C:\\Miniconda36-x64"
 
 install:
-  - "SET PATH=%CONDA%;%CONDA%\\Scripts;%PATH%"
-  - "conda install -y %CHANS% pyctdev && doit ecosystem_setup"
-  - "doit env_create --name=contrib_colormaps --python=%PY%"
-  - "activate contrib_colormaps"
-  - "doit develop_install %CHANS% -o examples"
+  - "SET PATH=%PYTHON%;%PATH%"
+  - "pip install pyctdev && doit ecosystem_setup"
+  - "doit develop_install -o examples -o tests"
   - "doit env_capture"
 
 build: off

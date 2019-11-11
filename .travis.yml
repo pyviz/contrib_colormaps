@@ -8,6 +8,7 @@ env:
     - LABELS_REL="--label dev --label main"
     - PYENV_VERSION=3.7
     - PKG_TEST_PYTHON="--test-python=py37 --test-python=py27"
+    - MPLBACKEND="Agg"
 
 stages:
   - test
@@ -25,7 +26,9 @@ jobs:
     - &pip_default
       stage: test
       before_install: pip install pyctdev && doit ecosystem_setup
-      install: doit develop_install -o examples -o tests
+      install:
+        - doit develop_install -o examples -o tests
+        - doit env_capture
       script: doit test_all
 
     - &website
