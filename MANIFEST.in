@@ -2,6 +2,7 @@ include LICENSE.txt
 include README.md
 include contrib_colormaps/._version
 graft examples
+graft contrib_colormaps/colormaps
 global-exclude *.py[co]
 global-exclude *~
 global-exclude *.ipynb_checkpoints/*

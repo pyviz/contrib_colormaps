@@ -9,6 +9,7 @@ BASELINE_PATH = os.path.join(HERE, 'baseline')
 
 
 @pytest.mark.parametrize('filename', sorted(os.listdir(CSV_PATH)))
+@pytest.mark.files
 def test_notebook_for_every_csv(filename):
     name, ext = os.path.splitext(filename)
     assert '{name}.ipynb'.format(name=name) in os.listdir(NOTEBOOKS_PATH), \
@@ -16,14 +17,16 @@ def test_notebook_for_every_csv(filename):
 
 
 @pytest.mark.parametrize('filename', sorted(os.listdir(CSV_PATH)))
+@pytest.mark.files
 def test_baseline_image_exists_for_every_csv(filename):
     name, ext = os.path.splitext(filename)
     assert any(name in img for img in os.listdir(BASELINE_PATH)), \
            ('Every colormap must have its matplotlib test images checked in. '
-            'From within tests dir run pytest pytest --mpl-generate-path=baseline.')
+            'From within tests dir run pytest --mpl-generate-path=baseline.')
 
 
 @pytest.mark.parametrize('filename', sorted(os.listdir(CSV_PATH)))
+@pytest.mark.files
 def test_mpl_bokeh_and_regular_cmap_for_every_csv(filename):
     name, ext = os.path.splitext(filename)
     import contrib_colormaps as cc
