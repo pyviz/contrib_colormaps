@@ -11,19 +11,20 @@
 ## What is it?
 
 contrib_colormaps is a collection of user-contributed colormaps
-for use with Python plotting programs like
-[bokeh](http://bokeh.pydata.org),
-[matplotlib](http://matplotlib.org), and
-[holoviews](http://holoviews.org).
+for use with Python plotting programs such as
+[Bokeh](https://bokeh.org),
+[Matplotlib](https://matplotlib.org),
+[HoloViews](https://holoviews.org), and
+[Datashader](https://datashader.org).
 
 
 ## Installation
 
 contrib_colormaps supports Python 2.7, 3.5, 3.6 and 3.7 on Linux, Windows,
-or Mac and can be installed with conda:
+or Mac and can be installed with conda from the pyviz channel:
 
 ```
-conda install contrib_colormaps
+conda install -c pyviz contrib_colormaps
 ```
 
 or with pip:
