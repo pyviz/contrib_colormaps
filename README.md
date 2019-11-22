@@ -37,20 +37,31 @@ pip install contrib_colormaps
 To add a colormap, open a pull request on this repository adding the following files:
 
 1. comma-separated file of RGB values to the contrib_colormaps/colormaps
-directory. This file should look like:
+   directory. This file should look like:
 
-```
-0, 0.20755, 0.97632
-0, 0.22113, 0.96201
-```
+   ```
+   0, 0.20755, 0.97632
+   0, 0.22113, 0.96201
+   ```
 
 2. A Jupyter notebook in [examples/colormaps](examples/colormaps) meeting the following criteria:
 
-    1. a name that matches the name of the csv 
+    1. a name that matches the name of the csv
             e.g. for a new colormap called `rainforest` with a csv *rainforest.csv* there should be a corresponding *rainforest.ipynb*
     2. an explanation of the colormap - what is it? and when/why would someone use it?
-    3. a swatch of the colormap - we recommend using our [swatch function](colormaps/index.ipynb), but it's not required
-    3. at least one example plot using the colormap - it can be exclusively Bokeh, Matplotlib, or Holoviews
+    3. a swatch of the colormap - we recommend using our [swatch function](index.ipynb), but it's not required
+    4. at least one example plot using the colormap - it can be exclusively Bokeh, Matplotlib, or Holoviews
+
+   The notebook should be cleared of all outputs. Use the UI:
+
+   ![Clear all outputs](assets/clear_outputs.png)
+
+   OR clear them automatically on commit using the predefined git hook.
+   From within the cloned repository, run:
+
+   ```bash
+   git config core.hooksPath .githooks
+   ```
 
 You can use this sample pull request as a model: [#3](https://github.com/pyviz/contrib_colormaps/pull/3)
 
