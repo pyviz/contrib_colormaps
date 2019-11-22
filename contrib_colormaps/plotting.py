@@ -12,7 +12,7 @@ from . import palette, cm
 
 array = np.meshgrid(np.linspace(0, 1, 256), np.linspace(0, 1, 10))[0]
 
-def swatch(name, bounds=None, array=array, **kwargs):
+def swatch(name, bounds=None, array=array, aspect=10, **kwargs):
     """Show swatch using matplotlib or bokeh via holoviews"""
     if bounds is None:
         bounds = (0, 0, 256, 1)
@@ -20,16 +20,22 @@ def swatch(name, bounds=None, array=array, **kwargs):
     plot = hv.Image(array, bounds=bounds, group=name)
     backends = hv.Store.loaded_backends()
     if 'bokeh' in backends:
-        width = kwargs.pop('width', 900)
-        height = kwargs.pop('height', 100)
-        plot.opts(opts.Image(backend='bokeh', width=width, height=height, toolbar='above',
-                             default_tools=['xwheel_zoom', 'xpan', 'save', 'reset'],
+        frame_height = kwargs.pop('frame_height', 60)
+        plot.opts(opts.Image(backend='bokeh', aspect=aspect, frame_height=frame_height,
+                             toolbar='above', default_tools=['xwheel_zoom', 'xpan', 'save', 'reset'],
                              cmap=palette[name]))
     if 'matplotlib' in backends:
-        aspect = kwargs.pop('aspect', 15)
-        fig_size = kwargs.pop('fig_size', 350)
+        def hook(plot, element):
+            plot.handles['axis'].axis('off')
+            plot.handles['axis'].set_title("sample", loc='left',
+                                            fontfamily='DejaVu Sans', fontsize=14,
+                                            fontweight='roman',fontstretch='semi-expanded')
+
+        fig_size = kwargs.pop('fig_size', 300)
+
         plot.opts(opts.Image(backend='matplotlib', aspect=aspect, fig_size=fig_size,
-                             cmap=cm[name]))
+                             title="", cmap=cm[name], hooks=[hook]))
+
     return plot.opts(opts.Image(xaxis=None, yaxis=None), opts.Image(**kwargs))
 
 

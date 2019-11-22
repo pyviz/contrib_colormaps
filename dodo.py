@@ -10,9 +10,9 @@ all the available commands - after installing pyctdev - run:
 
 $ doit list
 
-To run one command, for instance building the website, run:
+To run one command, for instance building the docs, run:
 
-$ doit build_website
+$ doit build_docs
 """
 
 from pyctdev import * # noqa: api

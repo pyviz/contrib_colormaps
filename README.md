@@ -34,31 +34,26 @@ pip install contrib_colormaps
 
 ## Contributing
 
-To add a colormap, open a pull request on this repository adding a
-comma-separated file of RGB values to the contrib_colormaps/colormaps
+To add a colormap, open a pull request on this repository adding the following files:
+
+1. comma-separated file of RGB values to the contrib_colormaps/colormaps
 directory. This file should look like:
 
 ```
-0,0.20755,0.97632
-0,0.22113,0.96201
+0, 0.20755, 0.97632
+0, 0.22113, 0.96201
 ```
 
-This PR should also include a new notebook in
-[examples/colormaps](examples/colormaps) with a name that matches the
-name of the csv (e.g. for a new colormap called 'rainforest' with a csv
-'rainforest.csv' there should be a corresponding 'rainforest.ipynb').
+2. A Jupyter notebook in [examples/colormaps](examples/colormaps) meeting the following criteria:
 
-The last requirement is that you regenerate the baseline images used for tests.
-First make sure you have holoviews, matplotlib, and pytest-mpl in your
-environment. Then change directories into tests, and regenerate the plots
+    1. a name that matches the name of the csv 
+            e.g. for a new colormap called `rainforest` with a csv *rainforest.csv* there should be a corresponding *rainforest.ipynb*
+    2. an explanation of the colormap - what is it? and when/why would someone use it?
+    3. a swatch of the colormap - we recommend using our [swatch function](colormaps/index.ipynb), but it's not required
+    3. at least one example plot using the colormap - it can be exclusively Bokeh, Matplotlib, or Holoviews
 
-```
-cd contrib_colorcets/tests
-pytest --mpl-generate-path=baseline
-```
-
+You can use this sample pull request as a model: [#3](https://github.com/pyviz/contrib_colormaps/pull/3)
 
 ## About PyViz
-
 contrib_colormaps is part of the PyViz initiative for making Python-based
 visualization tools work well together. See [pyviz.org](http://pyviz.org).
