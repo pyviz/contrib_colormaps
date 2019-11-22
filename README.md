@@ -53,9 +53,9 @@ To add a colormap, open a pull request on this repository adding the following f
     3. a swatch of the colormap - we recommend using our [swatch function](index.ipynb), but it's not required
     4. at least one example plot using the colormap - it can be exclusively Bokeh, Matplotlib, or Holoviews
 
-   The notebook should be cleared of all outputs. Use the UI:
+   The notebook should be cleared of all outputs. To use the UI, click Cell -> All Outputs -> Clear
 
-   ![Clear all outputs](assets/clear_outputs.png)
+   <img src="assets/clear_outputs.png" alt="Clear all outputs" width="50%"/>
 
    OR clear them automatically on commit using the predefined git hook.
    From within the cloned repository, run:
@@ -64,6 +64,22 @@ To add a colormap, open a pull request on this repository adding the following f
    git config core.hooksPath .githooks
    ```
 
+3. A pytest-mpl baseline image for tests. To create this image first install pytest-mpl:
+
+    ```bash
+    pip install pytest-mpl
+    ```
+
+    Then generate the figure **from within the tests directory** run:
+
+    ```bash
+    pytest --mpl-generate-path=baseline
+    ```
+
+    See [examples/colormaps](contrib_colormaps/tests) for more details.
+
+
+### Sample Pull Request
 You can use this sample pull request as a model: [#3](https://github.com/pyviz/contrib_colormaps/pull/3)
 
 ## About PyViz
